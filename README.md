@@ -24,9 +24,9 @@ This project aims to enhance the decision-making process for credit card issuanc
 
 
 ## Team Members
-- **Ishan Mani Tripathi
-- ** Mani Gupta
-- ** Prakhar Singh
-- ** Ritabrata Das
-- ** Rahul Suman
-- ** Sneha Singh
+- Ishan Mani Tripathi
+- Mani Gupta
+- Prakhar Singh
+- Ritabrata Das
+- Rahul Suman
+- Sneha Singh
