@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="fontawesome-free-5.6.3-web/css/all.css">
+  <!-- Our Custom CSS style sheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="index.css">
+  <title>Data Table</title>
+</head>
+<!-- xs<576 | 576<sm<768 | 768<md<992 | 992<lg<1200 | 1200<xl -->
+
+<body>
+  <header>
+    <div id="bottomHeader">
+      <div class="container-fluid">
+        <nav class="navbar navbar-dark navbar-expand-md" style="background-color:#004d80;">
+          <a class="navbar-brand" href="home.html">
+            <img src="imgs/logo.jpg" width="50px" alt="">
+          </a>
+          <button data-toggle="collapse" data-target="#navbarToggler" type="button" class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarToggler">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="home.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="aboutus.html">About Us</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="prediction.html">Data Table</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="dataform.html">Prediction</a>
+              </li>
+             
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <section class="p-0 pt-md-12 pb-md-12">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-md-12">
+          <img class="img-fluid" src="imgs/cover-3.jpg" alt="" style="width: 100%; height: 300px;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <nav>
+        <div class="search-bar" style="text-align: center; padding-left: 30px;">
+          <input type="text" placeholder="Search Customer ID" id="searchInput">
+          <button onclick="searchAndHighlight()">Search</button>
+        </div>
+    </nav>
+
+    <div class="table table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>ID</th>
+                    <th>CODE_GENDER</th>
+                    <th>FLAG_OWN_CAR</th>
+                    <th>FLAG_OWN_REALTY</th>
+                    <th>CNT_CHILDREN</th>
+                    <th>AMT_INCOME_TOTAL</th>
+                    <th>NAME_INCOME_TYPE</th>
+                    <th>NAME_EDUCATION_TYPE</th>
+                    <th>NAME_FAMILY_STATUS</th>
+                    <th>NAME_HOUSING_TYPE</th>
+                    <th>DAYS_BIRTH</th>
+                    <th>DAYS_EMPLOYED</th>
+                    <th>OCCUPATION_TYPE</th>
+                    <th>CNT_FAM_MEMBERS</th>
+                    <th>AGE</th>
+                    <th>LOAN_STATUS</th>
+                    <th>EMPLOYMENT_LENGTH_YEARS</th>
+                    <th>CREDIT_SCORE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- <div class="button-container">
+        <button>Add Data</button>
+        <button>Edit</button>
+        <button>Delete</button>
+        <button>Predict</button>
+    </div> -->
+
+    <script src = index.js></script>
+
+  <footer class="full-footer">
+    <div class="container-fluid bottom-footer pt-2">
+      <div class="row">
+        <div class="col-12 text-center">
+          <p>Copyrights © 2023 - All rights reserved</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="bootstrap/js/jquery-3.3.1.slim.min.js"></script>
+  <script src="bootstrap/js/popper.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  
+</body>
+</html>

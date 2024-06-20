@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="fontawesome-free-5.6.3-web/css/all.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+    <title>Prediction</title>
+
+    <style>
+        /* Banner height reduction and credit score popup styles */
+
+        /* Banner height reduction */
+        .col-md-12 img {
+            height: 100px; /* Adjust the height as needed */
+        }
+
+        /* Style the form container */
+        .container-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70vh; /* Adjusted height to fill 80% of the viewport height */
+        }
+
+        /* Equal-width divs for inputs and labels */
+        .input-container {
+            width: 45%; /* Adjusted width to leave some space between input and output */
+            box-sizing: border-box;
+            padding: 20px;
+            margin: 10px;
+            font-size: 24px;
+            border: 2px solid #004d80;
+            border-radius: 8px;
+            background-color: #f8f9fa; /* Adjusted background color */
+        }
+
+        /* Increase the size of input fields */
+        .input-container input,
+        .input-container select {
+            width: 100%;
+            padding: 20px;
+            font-size: 24px;
+            margin-bottom: 15px; /* Added margin for spacing between elements */
+        }
+
+        /* Style the buttons */
+        .button-container button {
+            background-color: #004d80;
+            color: white;
+            padding: 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            width: 100%; /* Adjusted to fit within the available space */
+        }
+
+        /* Style the result container */
+        .output-container {
+            width: 45%; /* Adjusted width to leave some space between input and output */
+            height: 50vh; /* Adjusted height to fill 80% of the viewport height */
+            box-sizing: border-box;
+            padding: 20px;
+            margin: 10px;
+            font-size: 42px;
+            border: 2px solid #004d80;
+            border-radius: 8px;
+            background-color: #f8f9fa; /* Adjusted background color */
+            text-align: center;
+            justify-content: center; /* Center-align text horizontally */
+            display: none; /* Initially hidden */
+        } 
+</style>
+</head>
+
+<body>
+    <header>
+        <div id="bottomHeader">
+            <div class="container-fluid">
+                <nav class="navbar navbar-dark navbar-expand-md" style="background-color:#004d80;">
+                    <a class="navbar-brand" href="home.html">
+                        <img src="imgs/logo.jpg" width="50px" alt="">
+                    </a>
+                    <button data-toggle="collapse" data-target="#navbarToggler" type="button"
+                        class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarToggler">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="home.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="aboutus.html">About Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="prediction.html">Data Table</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="dataform.html">Prediction</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="p-0 pt-md-12 pb-md-12">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-12">
+                    <img class="img-fluid" src="imgs/cover-3.jpg" alt=""
+                        style="width: 100%; height: 100px; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container-flex">
+        <!-- Input container on the left -->
+        <div class="input-container">
+            <label for="id" style="font-weight: bold;">ID:</label>
+            <input type="text" id="id" placeholder="Enter ID">
+            <label for="name" style="font-weight: bold;">Name:</label>
+            <input type="text" id="name" placeholder="Enter Name">
+            <!-- Other input fields as per your existing code -->
+            <div class="button-container">
+                <button onclick="checkCreditScore()">Predict</button>
+            </div>
+        </div>
+
+        <!-- Result container on the right -->
+        <div class="output-container" id="result"></div>
+    </div>
+
+    <footer class="full-footer">
+        <div class="container-fluid bottom-footer pt-2">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p>Copyrights © 2023 - All rights reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="bootstrap/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="bootstrap/js/popper.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        function checkCreditScore() {
+            var idToCheck = parseFloat(document.getElementById('id').value.trim());
+            var nameToCheck = document.getElementById('name').value.trim();
+
+            var xlsxFilePath = 'cleaned_dataset_cs.xlsx';
+            var req = new XMLHttpRequest();
+            req.open('GET', xlsxFilePath, true);
+            req.responseType = 'arraybuffer';
+
+            req.onload = function (e) {
+                var data = new Uint8Array(req.response);
+                var workbook = XLSX.read(data, { type: 'array' });
+                var firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+                var jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
+
+                var record = jsonData.find(item => parseFloat(item[0]) === idToCheck);
+
+                if (record) {
+                    var creditScore = record[17]; // Assuming credit score is in the 18th column (0-based index)
+                    var resultMsg = creditScore > 100 ?
+                        `Congratulations, ${nameToCheck}, your credit card application is approved. Your credit score is ${creditScore}.` :
+                        `Unfortunately, ${nameToCheck}, your credit card application has been rejected. Your credit score is ${creditScore}.`;
+
+                    document.getElementById('result').innerHTML = resultMsg;
+                    document.querySelector('.output-container').style.display = 'block';
+                } else {
+                    alert("ID not found. Please enter a valid ID.");
+                    document.getElementById('result').innerHTML = "";
+                    document.querySelector('.output-container').style.display = 'none';
+                }
+            };
+
+            req.send();
+        }
+    </script>
+
+</body>
+
+</html>
