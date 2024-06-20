@@ -20,3 +20,13 @@ We have experimented with several models to identify the best-performing one for
 
 ## Conclusion
 This project aims to enhance the decision-making process for credit card issuance by employing both traditional and modern predictive models, ensuring both accuracy and fairness while maintaining transparency.
+
+
+
+## Team Members
+- **Ishan Mani Tripathi
+- ** Mani Gupta
+- ** Prakhar Singh
+- ** Ritabrata Das
+- ** Rahul Suman
+- ** Sneha Singh
